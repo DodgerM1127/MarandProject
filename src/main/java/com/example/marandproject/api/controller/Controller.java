@@ -1,6 +1,7 @@
 package com.example.marandproject.api.controller;
 
 import com.example.marandproject.api.model.Airport;
+import com.example.marandproject.api.model.Carrier;
 import com.example.marandproject.api.repository.AirportRepository;
 import com.example.marandproject.api.repository.FlightRepository;
 import com.example.marandproject.api.service.Service;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/airport")
+@RequestMapping("/fbn")
 public class Controller {
 
     Service service;
@@ -18,26 +19,47 @@ public class Controller {
         this.service = service;
     }
 
-    @GetMapping("/{airportId}")
+    @GetMapping("/airport/{airportId}")
     public Airport getAirport(@PathVariable Long airportId){
         return service.getAirport(airportId);
     }
 
-    @GetMapping()
+    @GetMapping("/airport")
     public List<Airport> getAllAirports(){
         return service.getAllAirports();
     }
 
-    @PostMapping()
+    @PostMapping("/airport")
     public String createAirport(@RequestBody Airport airport){
         service.createAirport(airport);
         return "Airport created";
     }
 
-    @DeleteMapping("/{airportId}")
+    @DeleteMapping("/airport/{airportId}")
     public String deleteAirport(@PathVariable Long airportId){
         service.deleteAirport(airportId);
         return "Airport Deleted";
+    }
+    @GetMapping("/carrier/{carrierId}")
+    public Carrier getCarrier(@PathVariable Long carrierId){
+        return service.getCarrier(carrierId);
+    }
+
+    @GetMapping("/carrier")
+    public List<Carrier> getAllCarriers(){
+        return service.getAllCarriers();
+    }
+
+    @PostMapping("/carrier")
+    public String createCarrier(@RequestBody Carrier carrier){
+        service.createCarrier(carrier);
+        return "Carrier created";
+    }
+
+    @DeleteMapping("/carrier/{carrierId}")
+    public String deleteCarrier(@PathVariable Long carrierId){
+        service.deleteCarrier(carrierId);
+        return "Carrier Deleted";
     }
 
 

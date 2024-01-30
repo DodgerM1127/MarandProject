@@ -9,8 +9,16 @@ import java.util.Set;
 @Table(name = "carrier")
 public class Carrier {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idCarrier")
+    @SequenceGenerator(
+            name = "carrier_sequence",
+            sequenceName = "carrier_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "carrier_sequence"
+    )
+    @Column(name = "id_Carrier")
     Long idCarrier;
     @Column(name = "name")
     String name;
