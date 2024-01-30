@@ -4,6 +4,7 @@ import com.example.marandproject.api.model.Airport;
 import com.example.marandproject.api.model.Carrier;
 import com.example.marandproject.api.model.Flight;
 
+import java.sql.Time;
 import java.util.List;
 
 public interface Service {
@@ -27,4 +28,6 @@ public interface Service {
     public String createFlight(Flight flight);
     public Flight getFlight(String flight_Number);
     public List<Flight> getAllFlights();
+
+    public void createFlight(String flightNumber, Long originAirport, Long destinationAirport, Long carrier, double price, String day, Time time, Time duration, int availableSeats);
 }

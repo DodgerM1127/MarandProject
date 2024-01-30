@@ -7,6 +7,7 @@ import com.example.marandproject.api.repository.AirportRepository;
 import com.example.marandproject.api.repository.CarrierRepository;
 import com.example.marandproject.api.repository.FlightRepository;
 
+import java.sql.Time;
 import java.util.List;
 
 @org.springframework.stereotype.Service
@@ -81,4 +82,20 @@ public class ServiceImpl implements Service{
     public List<Flight> getAllFlights() {
         return flightRepository.findAll();
     }
+
+    @Override
+    public void createFlight(String flightNumber, Long originAirport, Long destinationAirport, Long carrier, double price, String day, Time time, Time duration, int availableSeats) {
+        flightRepository.save(new Flight(
+                flightNumber,
+                getAirport(originAirport),
+                getAirport(destinationAirport),
+                getCarrier(carrier),
+                price,
+                day,
+                time,
+                duration,
+                availableSeats
+                ));
+    }
+
 }
