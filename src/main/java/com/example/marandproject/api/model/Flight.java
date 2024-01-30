@@ -7,13 +7,13 @@ import java.sql.Time;
 @Entity
 public class Flight {
     @Id
-    @Column(name = "flightNumber")
+    @Column(name = "flight_Number")
     String flightNumber;
     @ManyToOne
-    @JoinColumn(name = "originAirport")
+    @JoinColumn(name = "origin_Airport")
     Airport originAirport;
     @ManyToOne
-    @JoinColumn(name = "destinationAirport")
+    @JoinColumn(name = "destination_Airport")
     Airport destinationAirport;
     @ManyToOne
     @JoinColumn(name = "carrier")
@@ -26,7 +26,7 @@ public class Flight {
     Time time;
     @Column(name = "duration")
     Time duration;
-    @Column(name = "availableSeats")
+    @Column(name = "available_Seats")
     int availableSeats;
 
     public Flight(String flightNumber, Airport originAirport, Airport destinationAirport, Carrier carrier, double price, String day, Time time, Time duration, int availableSeats) {

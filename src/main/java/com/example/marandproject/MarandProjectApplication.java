@@ -13,12 +13,4 @@ public class MarandProjectApplication {
     public static void main(String[] args) {
         SpringApplication.run(MarandProjectApplication.class, args);
     }
-
-    @Bean
-    CommandLineRunner commandLineRunner (AirportRepository airportRepository){
-        return args -> {
-            Airport MC = new Airport("Mc");
-            airportRepository.save(MC);
-        };
-    }
 }

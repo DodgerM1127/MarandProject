@@ -23,26 +23,10 @@ public class Airport {
     @Column(name = "name")
     String name;
     @OneToMany(mappedBy = "destinationAirport", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Flight> flightsTo = new HashSet<>();
+    private final Set<Flight> flightsTo = new HashSet<>();
     @OneToMany(mappedBy = "originAirport", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Flight> flightsFrom = new HashSet<>();
+    private final Set<Flight> flightsFrom = new HashSet<>();
 
     public Airport() {
-    }
-
-    public Airport(String name) {
-        this.name = name;
-    }
-
-    public Long getIdAirport() {
-        return idAirport;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

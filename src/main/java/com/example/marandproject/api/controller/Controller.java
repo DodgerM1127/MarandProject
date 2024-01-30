@@ -2,8 +2,6 @@ package com.example.marandproject.api.controller;
 
 import com.example.marandproject.api.model.Airport;
 import com.example.marandproject.api.model.Carrier;
-import com.example.marandproject.api.repository.AirportRepository;
-import com.example.marandproject.api.repository.FlightRepository;
 import com.example.marandproject.api.service.Service;
 import org.springframework.web.bind.annotation.*;
 
