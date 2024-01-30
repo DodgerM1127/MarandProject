@@ -23,9 +23,20 @@ public class Carrier {
     @Column(name = "name")
     String name;
 
-    @OneToMany(mappedBy = "carrier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private final Set<Flight> flights = new HashSet<>();
+    @OneToMany(mappedBy = "carrier", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Flight> flights = new HashSet<>();
 
-    public Carrier() {
+    public Carrier() {}
+
+    public Carrier(String name) {
+        this.name = name;
+    }
+
+    public Long getIdCarrier() {
+        return idCarrier;
+    }
+
+    public String getName() {
+        return name;
     }
 }

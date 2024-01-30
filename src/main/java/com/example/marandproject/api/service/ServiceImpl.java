@@ -23,13 +23,15 @@ public class ServiceImpl implements Service{
 
 
     @Override
-    public void createAirport(Airport airport) {
+    public String createAirport(Airport airport) {
         airportRepository.save(airport);
+        return "airport saved";
     }
 
     @Override
-    public void deleteAirport(Long airport_id) {
+    public String deleteAirport(Long airport_id) {
         airportRepository.deleteById(airport_id);
+        return "airport deleted";
     }
 
     @Override
@@ -43,13 +45,15 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public void createCarrier(Carrier carrier) {
+    public String createCarrier(Carrier carrier) {
         carrierRepository.save(carrier);
+        return "carrier saved";
     }
 
     @Override
-    public void deleteCarrier(Long carrier_id) {
+    public String deleteCarrier(Long carrier_id) {
         carrierRepository.deleteById(carrier_id);
+        return "carrier deleted";
     }
 
     @Override
@@ -63,8 +67,9 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public void createFlight(Flight flight) {
+    public String createFlight(Flight flight) {
         flightRepository.save(flight);
+        return "flight created";
     }
 
     @Override
@@ -76,5 +81,4 @@ public class ServiceImpl implements Service{
     public List<Flight> getAllFlights() {
         return flightRepository.findAll();
     }
-
 }

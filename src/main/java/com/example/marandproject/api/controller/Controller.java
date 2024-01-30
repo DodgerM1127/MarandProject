@@ -18,7 +18,7 @@ public class Controller {
         this.service = service;
     }
 
-    // airport methods
+    //airport methods
 
     @GetMapping("/airport/{airportId}")
     public Airport getAirport(@PathVariable Long airportId){
@@ -68,6 +68,12 @@ public class Controller {
 
     //flight methods
 
+    @PostMapping("/flight")
+    public String createFlight(@RequestBody Flight flight){
+        service.createFlight(flight);
+        return "flight created";
+    }
+
     @GetMapping("/flight/{flight_Number}")
     public Flight getFlight(@PathVariable String flight_Number){
         return service.getFlight(flight_Number);
@@ -77,14 +83,4 @@ public class Controller {
     public List<Flight> getAllFlights(){
         return service.getAllFlights();
     }
-
-    @PostMapping("/flight")
-    public String createFlight(@RequestBody Flight flight){
-        service.createFlight(flight);
-        return "Flight created";
-    }
-
-
-
-
 }

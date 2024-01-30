@@ -1,5 +1,6 @@
 package com.example.marandproject.api.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Time;
@@ -8,25 +9,34 @@ import java.sql.Time;
 public class Flight {
     @Id
     @Column(name = "flight_Number")
+    @JsonManagedReference
     String flightNumber;
     @ManyToOne
     @JoinColumn(name = "origin_Airport")
+    @JsonManagedReference
     Airport originAirport;
     @ManyToOne
     @JoinColumn(name = "destination_Airport")
+    @JsonManagedReference
     Airport destinationAirport;
     @ManyToOne
     @JoinColumn(name = "carrier")
+    @JsonManagedReference
     Carrier carrier;
     @Column(name = "price")
+    @JsonManagedReference
     double price;
     @Column(name = "day")
+    @JsonManagedReference
     String day;
     @Column(name = "time")
+    @JsonManagedReference
     Time time;
     @Column(name = "duration")
+    @JsonManagedReference
     Time duration;
     @Column(name = "available_Seats")
+    @JsonManagedReference
     int availableSeats;
 
     public Flight(String flightNumber, Airport originAirport, Airport destinationAirport, Carrier carrier, double price, String day, Time time, Time duration, int availableSeats) {
