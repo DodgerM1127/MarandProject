@@ -2,6 +2,7 @@ package com.example.marandproject.api.controller;
 
 import com.example.marandproject.api.model.Airport;
 import com.example.marandproject.api.model.Carrier;
+import com.example.marandproject.api.model.Flight;
 import com.example.marandproject.api.service.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,8 @@ public class Controller {
     public Controller(Service service) {
         this.service = service;
     }
+
+    // airport methods
 
     @GetMapping("/airport/{airportId}")
     public Airport getAirport(@PathVariable Long airportId){
@@ -38,6 +41,9 @@ public class Controller {
         service.deleteAirport(airportId);
         return "Airport Deleted";
     }
+
+    //carrier methods
+
     @GetMapping("/carrier/{carrierId}")
     public Carrier getCarrier(@PathVariable Long carrierId){
         return service.getCarrier(carrierId);
@@ -59,6 +65,25 @@ public class Controller {
         service.deleteCarrier(carrierId);
         return "Carrier Deleted";
     }
+
+    //flight methods
+
+    @GetMapping("/flight/{flight_Number}")
+    public Flight getFlight(@PathVariable String flight_Number){
+        return service.getFlight(flight_Number);
+    }
+
+    @GetMapping("/flight")
+    public List<Flight> getAllFlights(){
+        return service.getAllFlights();
+    }
+
+    @PostMapping("/flight")
+    public String createFlight(@RequestBody Flight flight){
+        service.createFlight(flight);
+        return "Flight created";
+    }
+
 
 
 
