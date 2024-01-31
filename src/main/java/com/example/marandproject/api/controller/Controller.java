@@ -7,6 +7,7 @@ import com.example.marandproject.api.service.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,6 +38,13 @@ public class Controller {
         service.createAirport(airport);
         return "Airport created";
     }
+    @PostMapping("/airports")
+    public String createAirport(@RequestBody ArrayList<Airport> airports){
+        for (Airport airport : airports) {
+            service.createAirport(airport);
+        }
+        return "Airports created";
+    }
 
     @DeleteMapping("/airport/{airportId}")
     public String deleteAirport(@PathVariable Long airportId){
@@ -60,6 +68,14 @@ public class Controller {
     public String createCarrier(@RequestBody Carrier carrier){
         service.createCarrier(carrier);
         return "Carrier created";
+    }
+
+    @PostMapping("/carriers")
+    public String createCarriers(@RequestBody ArrayList<Carrier> carriers){
+        for (Carrier carrier : carriers) {
+            service.createCarrier(carrier);
+        }
+        return "Carriers created";
     }
 
     @DeleteMapping("/carrier/{carrierId}")
@@ -111,5 +127,24 @@ public class Controller {
     @GetMapping("/flight")
     public List<Flight> getAllFlights(){
         return service.getAllFlights();
+    }
+
+    @PostMapping("/flights")
+    public String createFlights(@RequestBody ArrayList<HashMap> jsonArray){
+
+        for(HashMap json : jsonArray) {
+            service.createFlight(
+                    (String) json.get("flightNumber"),
+                    Long.valueOf((int) json.get("originAirport")),
+                    Long.valueOf((int) json.get("destinationAirport")),
+                    Long.valueOf((int) json.get("carrier")),
+                    (double) json.get("price"),
+                    (String) json.get("day"),
+                    (String) json.get("time"),
+                    (String) json.get("duration"),
+                    (int) json.get("availableSeats")
+            );
+        }
+        return "flight created";
     }
 }
