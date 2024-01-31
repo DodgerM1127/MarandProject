@@ -84,7 +84,17 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public void createFlight(String flightNumber, Long originAirport, Long destinationAirport, Long carrier, double price, String day, Time time, Time duration, int availableSeats) {
+    public void createFlight(
+            String flightNumber,
+            Long originAirport,
+            Long destinationAirport,
+            Long carrier,
+            double price,
+            String day,
+            String time,
+            String duration,
+            int availableSeats
+    ) {
         flightRepository.save(new Flight(
                 flightNumber,
                 getAirport(originAirport),

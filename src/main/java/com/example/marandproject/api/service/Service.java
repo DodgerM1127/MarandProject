@@ -29,5 +29,15 @@ public interface Service {
     public Flight getFlight(String flight_Number);
     public List<Flight> getAllFlights();
 
-    public void createFlight(String flightNumber, Long originAirport, Long destinationAirport, Long carrier, double price, String day, Time time, Time duration, int availableSeats);
+    public void createFlight(
+            String flightNumber,
+            Long originAirport,
+            Long destinationAirport,
+            Long carrier,
+            double price,
+            String day,
+            String time,
+            String duration,
+            int availableSeats
+    );
 }

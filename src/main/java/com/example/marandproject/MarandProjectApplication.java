@@ -38,8 +38,8 @@ public class MarandProjectApplication {
                     Ca,
                     300,
                     "mon",
-                    new Time(15,0,0),
-                    new Time(15,0,0),
+                    "15-00-00",
+                    "02-00-00",
                     5);
             Flight num2 = new Flight("SA002",
                     MC2,
@@ -47,8 +47,8 @@ public class MarandProjectApplication {
                     Ca2,
                     300,
                     "mon",
-                    new Time(15,0,0),
-                    new Time(15,0,0),
+                    "15-00-00",
+                    "02-00-00",
                     5);
             Flight num3 = new Flight("SA003",
                     MC3,
@@ -56,8 +56,8 @@ public class MarandProjectApplication {
                     Ca2,
                     300,
                     "mon",
-                    new Time(15,0,0),
-                    new Time(15,0,0),
+                    "15-00-00",
+                    "02-00-00",
                     5);
             flightRepository.save(num1);
             flightRepository.save(num2);

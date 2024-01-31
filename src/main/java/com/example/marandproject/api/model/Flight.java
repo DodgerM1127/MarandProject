@@ -31,15 +31,15 @@ public class Flight {
     String day;
     @Column(name = "time")
     @JsonManagedReference
-    Time time;
+    String time;
     @Column(name = "duration")
     @JsonManagedReference
-    Time duration;
+    String duration;
     @Column(name = "available_Seats")
     @JsonManagedReference
     int availableSeats;
 
-    public Flight(String flightNumber, Airport originAirport, Airport destinationAirport, Carrier carrier, double price, String day, Time time, Time duration, int availableSeats) {
+    public Flight(String flightNumber, Airport originAirport, Airport destinationAirport, Carrier carrier, double price, String day, String time, String duration, int availableSeats) {
         this.flightNumber = flightNumber;
         this.originAirport = originAirport;
         this.destinationAirport = destinationAirport;

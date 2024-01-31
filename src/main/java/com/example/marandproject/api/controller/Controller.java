@@ -7,6 +7,7 @@ import com.example.marandproject.api.service.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Time;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -69,7 +70,7 @@ public class Controller {
 
     //flight methods
 
-    @PostMapping("/flight/{flightNumber}")
+    @GetMapping("/flight/{flightNumber}")
     public Flight getFlight(@PathVariable String flightNumber){
         return service.getFlight(flightNumber);
     }
@@ -81,12 +82,29 @@ public class Controller {
                             @PathVariable Long carrier,
                             @PathVariable double price,
                             @PathVariable String day,
-                            @PathVariable Time time,
-                            @PathVariable Time duration,
+                            @PathVariable String time,
+                            @PathVariable String duration,
                             @PathVariable int availableSeats
 
     ){
         service.createFlight(flight_Number, originAirport, destinationAirport, carrier, price, day, time, duration, availableSeats);
+        return "flight created";
+    }
+
+    @PostMapping("/flight/")
+    public String createFlight1(@RequestBody HashMap json){
+
+        service.createFlight(
+                (String) json.get("flightNumber"),
+                Long.valueOf((int)json.get("originAirport")),
+                Long.valueOf((int)json.get("destinationAirport")),
+                Long.valueOf((int) json.get("carrier")),
+                (double)json.get("price"),
+                (String)json.get("day"),
+                (String)json.get("time"),
+                (String)json.get("duration"),
+                (int)json.get("availableSeats")
+        );
         return "flight created";
     }
 
