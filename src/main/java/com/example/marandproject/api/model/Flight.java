@@ -3,7 +3,6 @@ package com.example.marandproject.api.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-import java.sql.Time;
 
 @Entity
 public class Flight {

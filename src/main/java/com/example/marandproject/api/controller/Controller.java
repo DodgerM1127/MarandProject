@@ -6,7 +6,6 @@ import com.example.marandproject.api.model.Flight;
 import com.example.marandproject.api.service.Service;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +24,7 @@ public class Controller {
 
     @GetMapping("/airport/{airportId}")
     public Airport getAirport(@PathVariable Long airportId){
-        return service.getAirport(airportId);
+        return service.getAirportById(airportId);
     }
 
     @GetMapping("/airport")
@@ -39,7 +38,7 @@ public class Controller {
         return "Airport created";
     }
     @PostMapping("/airports")
-    public String createAirport(@RequestBody ArrayList<Airport> airports){
+    public String createAirports(@RequestBody ArrayList<Airport> airports){
         for (Airport airport : airports) {
             service.createAirport(airport);
         }
@@ -56,7 +55,7 @@ public class Controller {
 
     @GetMapping("/carrier/{carrierId}")
     public Carrier getCarrier(@PathVariable Long carrierId){
-        return service.getCarrier(carrierId);
+        return service.getCarrierById(carrierId);
     }
 
     @GetMapping("/carrier")
@@ -91,26 +90,10 @@ public class Controller {
         return service.getFlight(flightNumber);
     }
 
-    @PostMapping("/flight/{flight_Number}/{originAirport}/{destinationAirport}/{carrier}/{price}/{day}/{time}/{duration}/{availableSeats}")
-    public String createFlight(@PathVariable String flight_Number,
-                            @PathVariable Long originAirport,
-                            @PathVariable Long destinationAirport,
-                            @PathVariable Long carrier,
-                            @PathVariable double price,
-                            @PathVariable String day,
-                            @PathVariable String time,
-                            @PathVariable String duration,
-                            @PathVariable int availableSeats
-
-    ){
-        service.createFlight(flight_Number, originAirport, destinationAirport, carrier, price, day, time, duration, availableSeats);
-        return "flight created";
-    }
-
     @PostMapping("/flight/")
-    public String createFlight1(@RequestBody HashMap json){
+    public String createFlightById(@RequestBody HashMap json){
 
-        service.createFlight(
+        service.createFlightById(
                 (String) json.get("flightNumber"),
                 Long.valueOf((int)json.get("originAirport")),
                 Long.valueOf((int)json.get("destinationAirport")),
@@ -130,14 +113,50 @@ public class Controller {
     }
 
     @PostMapping("/flights")
-    public String createFlights(@RequestBody ArrayList<HashMap> jsonArray){
+    public String createFlightsById(@RequestBody ArrayList<HashMap> jsonArray){
 
         for(HashMap json : jsonArray) {
-            service.createFlight(
+            service.createFlightById(
                     (String) json.get("flightNumber"),
                     Long.valueOf((int) json.get("originAirport")),
                     Long.valueOf((int) json.get("destinationAirport")),
                     Long.valueOf((int) json.get("carrier")),
+                    (double) json.get("price"),
+                    (String) json.get("day"),
+                    (String) json.get("time"),
+                    (String) json.get("duration"),
+                    (int) json.get("availableSeats")
+            );
+        }
+        return "flight created";
+    }
+
+    @PostMapping("/flightByName")
+    public String createFlightByName(@RequestBody HashMap json){
+
+        service.createFlightByName(
+                (String) json.get("flightNumber"),
+                (String) json.get("originAirport"),
+                (String) json.get("destinationAirport"),
+                (String) json.get("carrier"),
+                (double)json.get("price"),
+                (String)json.get("day"),
+                (String)json.get("time"),
+                (String)json.get("duration"),
+                (int)json.get("availableSeats")
+        );
+        return "flight created";
+    }
+
+    @PostMapping("/flightsByName")
+    public String createFlightsByName(@RequestBody ArrayList<HashMap> jsonArray){
+
+        for(HashMap json : jsonArray) {
+            service.createFlightByName(
+                    (String) json.get("flightNumber"),
+                    (String) json.get("originAirport"),
+                    (String) json.get("destinationAirport"),
+                    (String) json.get("carrier"),
                     (double) json.get("price"),
                     (String) json.get("day"),
                     (String) json.get("time"),

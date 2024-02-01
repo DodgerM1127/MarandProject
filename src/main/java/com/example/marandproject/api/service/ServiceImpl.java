@@ -7,8 +7,8 @@ import com.example.marandproject.api.repository.AirportRepository;
 import com.example.marandproject.api.repository.CarrierRepository;
 import com.example.marandproject.api.repository.FlightRepository;
 
-import java.sql.Time;
 import java.util.List;
+import java.util.Optional;
 
 @org.springframework.stereotype.Service
 public class ServiceImpl implements Service{
@@ -36,8 +36,18 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public Airport getAirport(Long airport_id) {
+    public Airport getAirportById(Long airport_id) {
         return airportRepository.findById(airport_id).get();
+    }
+
+    @Override
+    public Airport getAirportByName(String airport_name) {
+        List<Airport> temp =  airportRepository.findAll();
+        for(Airport airport : temp){
+            if(airport.getName().equals(airport_name))
+                return airport;
+        }
+        return null;
     }
 
     @Override
@@ -58,8 +68,18 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public Carrier getCarrier(Long carrier_id) {
+    public Carrier getCarrierById(Long carrier_id) {
         return carrierRepository.findById(carrier_id).get();
+    }
+
+    @Override
+    public Carrier getCarrierByName(String carrier_name) {
+        List<Carrier> temp =  carrierRepository.findAll();
+        for(Carrier carrier : temp){
+            if(carrier.getName().equals(carrier_name))
+                return carrier;
+        }
+        return null;
     }
 
     @Override
@@ -84,7 +104,7 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public void createFlight(
+    public void createFlightById(
             String flightNumber,
             Long originAirport,
             Long destinationAirport,
@@ -97,15 +117,41 @@ public class ServiceImpl implements Service{
     ) {
         flightRepository.save(new Flight(
                 flightNumber,
-                getAirport(originAirport),
-                getAirport(destinationAirport),
-                getCarrier(carrier),
+                getAirportById(originAirport),
+                getAirportById(destinationAirport),
+                getCarrierById(carrier),
                 price,
                 day,
                 time,
                 duration,
                 availableSeats
                 ));
+    }
+
+
+    @Override
+    public void createFlightByName(
+            String flightNumber,
+            String originAirport,
+            String destinationAirport,
+            String carrier,
+            double price,
+            String day,
+            String time,
+            String duration,
+            int availableSeats
+    ) {
+        flightRepository.save(new Flight(
+                flightNumber,
+                getAirportByName(originAirport),
+                getAirportByName(destinationAirport),
+                getCarrierByName(carrier),
+                price,
+                day,
+                time,
+                duration,
+                availableSeats
+        ));
     }
 
 }
