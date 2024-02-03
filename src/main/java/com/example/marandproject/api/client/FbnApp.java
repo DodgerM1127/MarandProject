@@ -1,8 +1,7 @@
 package com.example.marandproject.api.client;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -85,6 +84,26 @@ public class FbnApp extends JFrame {
                 }
             }
         });
+        flights.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                JOptionPane.showInputDialog(null, "This is the message", "This is the default text");
+            }
+        });
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    String selectedItem = flights.getSelectedValue().toString();
+
+                    JOptionPane.showMessageDialog(null, "Reserved one seat on a flight: "+selectedItem.replaceAll(" +", " ").split(" ")[1]);
+
+
+
+
+                }
+            }
+        };
+        flights.addMouseListener(mouseListener);
     }
 
 
