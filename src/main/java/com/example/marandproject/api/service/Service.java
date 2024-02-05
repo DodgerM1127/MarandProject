@@ -26,8 +26,6 @@ public interface Service {
     public List<Carrier> getAllCarriers();
 
     //flight methods
-
-    public String createFlight(Flight flight);
     public Flight getFlight(String flight_Number);
     public List<Flight> getAllFlights();
     public String decreaseSeats(String flightName);

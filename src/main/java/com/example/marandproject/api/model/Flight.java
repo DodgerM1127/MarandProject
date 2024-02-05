@@ -3,7 +3,12 @@ package com.example.marandproject.api.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-
+/**
+ * This class is an Entity class represents an entity in the database. It is filled with flights.
+ * Each line in database represents one flight
+ * Has 9 columns: flightNumber is identifier, foreignKey originAirport, foreignKey destinationAirport,
+ * foreignKey carrier, price, day, time, duration and available seats
+ * */
 @Entity
 public class Flight {
     @Id
@@ -52,6 +57,8 @@ public class Flight {
 
     public Flight() {
     }
+
+    // removes one available seat or returns a message that there are no available seats
     public String decrementSeats(){
         if(0 < availableSeats) {
             availableSeats--;

@@ -88,12 +88,6 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public String createFlight(Flight flight) {
-        flightRepository.save(flight);
-        return "flight created";
-    }
-
-    @Override
     public Flight getFlight(String flight_Number) {
         return flightRepository.findById(flight_Number).get();
     }

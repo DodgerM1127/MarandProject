@@ -5,6 +5,11 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * This class is an Entity class represents an entity in the database. It is filled with carriers/airline.
+ * Each line in database represents one carrier/airline.
+ * Has 2 columns: idCarrier and name. IdCarrier is autoincrement.
+ * */
 @Entity
 @Table(name = "carrier")
 public class Carrier {
@@ -30,10 +35,6 @@ public class Carrier {
 
     public Carrier(String name) {
         this.name = name;
-    }
-
-    public Long getIdCarrier() {
-        return idCarrier;
     }
 
     public String getName() {

@@ -5,6 +5,11 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * This class is an Entity class represents an entity in the database. It is filled with airports.
+ * Each line in database represents one airport.
+ * Has 2 columns: idAirport and name. IdAirport is autoincrement.
+ * */
 @Entity
 @Table(name = "airport")
 public class Airport {
@@ -31,20 +36,7 @@ public class Airport {
 
     public Airport() {
     }
-
-    public Airport(String name) {
-        this.name = name;
-    }
-
-    public Long getIdAirport() {
-        return idAirport;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
