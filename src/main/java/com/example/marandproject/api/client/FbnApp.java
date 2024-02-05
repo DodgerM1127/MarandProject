@@ -3,6 +3,7 @@ package com.example.marandproject.api.client;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class FbnApp extends JFrame {
         findFlightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String response = getFlights();
+                String[] flightList = flightListStringToStringArray(response).toArray(new String[0]);
                 flightLines.removeAllElements();
                 String originA = originAirport.getText();
                 String destinationA = destinationAirport.getText();
@@ -84,26 +87,24 @@ public class FbnApp extends JFrame {
                 }
             }
         });
-        flights.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(ComponentEvent e) {
-                JOptionPane.showInputDialog(null, "This is the message", "This is the default text");
-            }
-        });
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     String selectedItem = flights.getSelectedValue().toString();
-
-                    JOptionPane.showMessageDialog(null, "Reserved one seat on a flight: "+selectedItem.replaceAll(" +", " ").split(" ")[1]);
-
-
-
-
+                    String flightNumber = selectedItem.replaceAll(" +", " ").split(" ")[1];
+                    String serverAnswer = decreaseSeats(flightNumber);
+                    JOptionPane.showMessageDialog(
+                            null,
+                            serverAnswer.equals("Good") ?
+                                    "Reserved one seat on a flight: " + flightNumber :
+                                    "On flight: "+ flightNumber + " " + serverAnswer
+                    );
+                    findFlightButton.doClick();
                 }
             }
         };
         flights.addMouseListener(mouseListener);
+        findFlightButton.doClick();
     }
 
 
@@ -263,6 +264,23 @@ public class FbnApp extends JFrame {
             response = scanner.useDelimiter("\\Z").next();
             scanner.close();
         }catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return response;
+    }
+
+    private String decreaseSeats(String flightNumber) {
+        String response;
+        try {
+            String requestURL = "http://localhost:8080/fbn/flight/seats/" + flightNumber;
+            URL url = new URL(requestURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("PUT");
+            connection.setDoOutput(true);
+            Scanner scanner = new Scanner(connection.getInputStream());
+            response = scanner.useDelimiter("\\Z").next();
+            scanner.close();
+        } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
         return response;

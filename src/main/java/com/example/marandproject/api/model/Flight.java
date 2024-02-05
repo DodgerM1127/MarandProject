@@ -57,6 +57,6 @@ public class Flight {
             availableSeats--;
             return "Good";
         }
-        return "Seats already zero!";
+        return "no available seats";
     }
 }
