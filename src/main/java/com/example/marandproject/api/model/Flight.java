@@ -52,4 +52,11 @@ public class Flight {
 
     public Flight() {
     }
+    public String decrementSeats(){
+        if(0 < availableSeats) {
+            availableSeats--;
+            return "Good";
+        }
+        return "Seats already zero!";
+    }
 }

@@ -85,6 +85,11 @@ public class Controller {
 
     //flight methods
 
+    @PutMapping("/flight/seats/{flightNumber}")
+    public String decreaseFlightSeats(@PathVariable String flightNumber){
+        return service.decreaseSeats(flightNumber);
+    }
+
     @GetMapping("/flight/{flightNumber}")
     public Flight getFlight(@PathVariable String flightNumber){
         return service.getFlight(flightNumber);

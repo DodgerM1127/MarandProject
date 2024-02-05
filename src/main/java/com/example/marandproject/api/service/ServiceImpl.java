@@ -104,6 +104,14 @@ public class ServiceImpl implements Service{
     }
 
     @Override
+    public String decreaseSeats(String flight_Number) {
+        Flight flight = getFlight(flight_Number);
+        String message = flight.decrementSeats();
+        flightRepository.save(flight);
+        return message;
+    }
+
+    @Override
     public void createFlightById(
             String flightNumber,
             Long originAirport,

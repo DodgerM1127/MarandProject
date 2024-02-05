@@ -30,7 +30,7 @@ public interface Service {
     public String createFlight(Flight flight);
     public Flight getFlight(String flight_Number);
     public List<Flight> getAllFlights();
-
+    public String decreaseSeats(String flightName);
     public void createFlightById(
             String flightNumber,
             Long originAirport,
