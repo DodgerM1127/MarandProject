@@ -18,7 +18,6 @@ public interface Service {
     public List<Airport> getAllAirports();
 
     //carrier methods
-
     public String createCarrier(Carrier carrier);
     public String deleteCarrier(Long carrier_id);
     public Carrier getCarrierById(Long carrier_id);
